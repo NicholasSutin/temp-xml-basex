@@ -1,0 +1,46 @@
+xquery version "3.1";
+
+(: ========================================= :)
+(: CODE 1 - MODIFIED FROM EXAMPLE CODE      :)
+(: Modified with 3 different colors and     :)
+(: 3 different numbers as instructed        :)
+(: ========================================= :)
+
+let $map := map { 'R': 'red', 'O': 'orange', 'P': 'purple' }
+return (
+  $map?*,
+  $map?R,
+  $map?('O', 'P')
+),
+let $array := [ 10, 20, 30 ]
+return (
+  $array?*,
+  $array?1,
+  $array?(2 to 3)
+)
+
+,
+
+(: ========================================= :)
+(: CODE 2 - CUSTOM CODE                     :)
+(: This code creates a small collection of  :)
+(: XML nodes representing books, each with  :)
+(: a "year" attribute. It then uses an      :)
+(: XPath expression to filter these books,  :)
+(: selecting only those published after     :)
+(: the year 2005. Finally, it returns the   :)
+(: titles of the selected books.            :)
+(: ========================================= :)
+
+let $books := (
+  <book year="2000">
+    <title>XQuery Basics</title>
+  </book>,
+  <book year="2010">
+    <title>Advanced XQuery</title>
+  </book>,
+  <book year="2022">
+    <title>BaseX in Practice</title>
+  </book>
+)
+return $books[@year > 2005]/title
